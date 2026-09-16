@@ -52,16 +52,10 @@ export default function ContactCTASection() {
               </p>
             </div>
             <div className="reveal-item scroll-reveal-hidden flex flex-wrap gap-3 mt-8">
-              <a
-                href="mailto:jaik320024444@gmail.com"
-                className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
+              <a href="mailto:jaik320024444@gmail.com" className="btn btn-primary">
                 Email Me
               </a>
-              <Link
-                href="/contact"
-                className="px-6 py-3 rounded-lg border border-border bg-transparent text-foreground font-semibold text-sm hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
+              <Link href="/contact" className="btn btn-secondary">
                 Contact Form
               </Link>
               {profile.githubUrl && (
@@ -69,18 +63,14 @@ export default function ContactCTASection() {
                   href={profile.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 rounded-lg border border-border text-muted-foreground font-mono text-xs hover:border-primary/40 hover:text-accent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="btn btn-secondary"
                   aria-label="GitHub profile"
                 >
                   GitHub
                 </a>
               )}
               {profile.resumeUrl && (
-                <a
-                  href={profile.resumeUrl}
-                  download
-                  className="px-4 py-3 rounded-lg border border-border text-muted-foreground font-mono text-xs hover:border-primary/40 hover:text-accent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
+                <a href={profile.resumeUrl} download className="btn btn-secondary">
                   Download CV
                 </a>
               )}

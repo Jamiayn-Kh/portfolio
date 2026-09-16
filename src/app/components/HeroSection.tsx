@@ -51,14 +51,7 @@ export default function HeroSection() {
           aria-hidden="true"
         />
         {/* Subtle grid */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(to right, rgba(124,58,237,0.3) 1px, transparent 1px)`,
-            backgroundSize: '64px 64px',
-          }}
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 technical-grid" aria-hidden="true" />
         {/* Noise */}
         <div className="absolute inset-0 noise-overlay" aria-hidden="true" />
       </div>
@@ -129,18 +122,11 @@ export default function HeroSection() {
               className="flex flex-wrap gap-3 animate-fade-in-up"
               style={{ animationDelay: '0.55s', opacity: 0, animationFillMode: 'forwards' }}
             >
-              <Link
-                href="/projects"
-                className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
+              <Link href="/projects" className="btn btn-primary">
                 View Projects
               </Link>
               {profile.resumeUrl && (
-                <a
-                  href={profile.resumeUrl}
-                  download
-                  className="px-6 py-3 rounded-lg border border-border bg-card text-foreground font-semibold text-sm hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
+                <a href={profile.resumeUrl} download className="btn btn-secondary">
                   Download CV
                 </a>
               )}
@@ -149,7 +135,7 @@ export default function HeroSection() {
                   href={profile.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 rounded-lg border border-border text-muted-foreground font-mono text-xs hover:border-primary/40 hover:text-accent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="btn btn-secondary"
                   aria-label="GitHub profile"
                 >
                   GitHub
@@ -160,7 +146,7 @@ export default function HeroSection() {
                   href={profile.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 rounded-lg border border-border text-muted-foreground font-mono text-xs hover:border-primary/40 hover:text-accent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="btn btn-secondary"
                   aria-label="LinkedIn profile"
                 >
                   LinkedIn

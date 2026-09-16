@@ -388,10 +388,7 @@ export default function ContactPageContent() {
                       <p className="mono-label text-muted-foreground">
                         Opens your email app. Send the message there.
                       </p>
-                      <button
-                        type="submit"
-                        className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group flex-shrink-0"
-                      >
+                      <button type="submit" className="btn btn-primary group">
                         Open Email Draft
                         <span
                           className="group-hover:translate-x-1 transition-transform duration-200"

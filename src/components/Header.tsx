@@ -42,7 +42,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'py-3 bg-background/90 backdrop-blur-xl border-b border-border'
+            ? 'py-3 bg-background/90 backdrop-blur-sm border-b border-border'
             : 'py-5 bg-transparent'
         }`}
       >
@@ -95,11 +95,7 @@ export default function Header() {
               </a>
             )}
             {profile.resumeUrl && (
-              <a
-                href={profile.resumeUrl}
-                download
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 bg-primary/10 text-accent font-mono text-xs font-medium hover:bg-primary/20 hover:border-primary/60 transition-all duration-200"
-              >
+              <a href={profile.resumeUrl} download className="btn btn-secondary">
                 Download CV
               </a>
             )}
@@ -128,7 +124,7 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col pt-24 px-6 pb-8"
+          className="fixed inset-0 z-40 bg-background/95 backdrop-blur-sm flex flex-col pt-24 px-6 pb-8"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
@@ -151,7 +147,7 @@ export default function Header() {
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
+                className="btn btn-secondary"
                 onClick={closeMobile}
               >
                 GitHub
@@ -162,7 +158,7 @@ export default function Header() {
                 href={profile.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
+                className="btn btn-secondary"
                 onClick={closeMobile}
               >
                 LinkedIn
@@ -172,7 +168,7 @@ export default function Header() {
               <a
                 href={profile.resumeUrl}
                 download
-                className="flex items-center justify-center gap-2 py-3 bg-primary/10 border border-primary/40 rounded-lg text-accent text-sm font-medium hover:bg-primary/20 transition-colors"
+                className="btn btn-secondary"
                 onClick={closeMobile}
               >
                 Download CV
