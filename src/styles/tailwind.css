@@ -226,6 +226,95 @@
     align-items: center;
     color: rgb(var(--accent) / 0.5);
   }
+  .project-visual::after {
+    content: '';
+    position: absolute;
+    inset: auto 1.5rem 1.5rem auto;
+    width: 4rem;
+    height: 4rem;
+    border-right: 1px solid rgb(var(--primary) / 0.45);
+    border-bottom: 1px solid rgb(var(--primary) / 0.45);
+  }
+  .architecture-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+  .architecture-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.875rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgb(var(--border) / 0.14);
+    border-radius: var(--radius-control);
+    background: rgb(var(--elevated));
+    color: rgb(var(--foreground));
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .architecture-node small {
+    margin-top: 0.125rem;
+    color: rgb(var(--muted-foreground));
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+  }
+  .architecture-line {
+    display: block;
+    width: 1px;
+    height: 1.25rem;
+    margin-inline: auto;
+    background: rgb(var(--primary) / 0.5);
+  }
+  .architecture-branch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 1.25rem;
+    margin-inline: 25%;
+  }
+  .architecture-branch span {
+    border-top: 1px solid rgb(var(--primary) / 0.5);
+  }
+  .architecture-branch span:first-child {
+    border-left: 1px solid rgb(var(--primary) / 0.5);
+  }
+  .architecture-branch span:last-child {
+    border-right: 1px solid rgb(var(--primary) / 0.5);
+  }
+  .architecture-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .architecture-notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .architecture-notes span {
+    border-left: 1px solid rgb(var(--primary) / 0.65);
+    padding-left: 0.5rem;
+    color: rgb(var(--muted-foreground));
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+  .architecture-compact .architecture-node {
+    min-height: 3.25rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .architecture-compact .architecture-line {
+    height: 0.75rem;
+  }
+  .architecture-compact .architecture-branch {
+    height: 0.75rem;
+  }
   .btn {
     display: inline-flex;
     align-items: center;

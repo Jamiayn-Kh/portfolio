@@ -21,6 +21,9 @@ export interface Project {
   keyAreas: string[];
   links: ProjectLink[];
   architecture?: ArchNode[];
+  /** Set to true only after the configured public cover file is added. */
+  coverImagePath: string;
+  coverImageAvailable: boolean;
   overview: string;
   problem?: string;
   solution?: string;
@@ -76,6 +79,8 @@ export const projects: Project[] = [
         sublabel: 'PostgreSQL',
       },
     ],
+    coverImagePath: '/projects/smart-zud/cover.webp',
+    coverImageAvailable: false,
     overview:
       'A web-based system for winter camp rental and dzud risk assessment, developed as a university diploma project.',
     solution:
@@ -117,6 +122,8 @@ export const projects: Project[] = [
         sublabel: 'PostgreSQL',
       },
     ],
+    coverImagePath: '/projects/mungun-urlal/cover.webp',
+    coverImageAvailable: false,
     overview:
       'A Java / Spring Boot backend project demonstrating application architecture, relational database usage, authentication and database migration.',
     solution:
@@ -161,6 +168,8 @@ export const projects: Project[] = [
         sublabel: 'MongoDB Atlas',
       },
     ],
+    coverImagePath: '/projects/af-shop/cover.webp',
+    coverImageAvailable: false,
     overview:
       'An online shopping system for clothing / retail, presented as one project under the AF Shop name.',
     solution:

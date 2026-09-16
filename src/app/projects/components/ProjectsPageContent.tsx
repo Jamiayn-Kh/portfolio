@@ -1,53 +1,28 @@
-'use client';
-
-import React, { useEffect, useRef } from 'react';
+import ProjectCard from '@/components/projects/ProjectCard';
 import { projects } from '@/data/projects';
-import CaseStudyCard from './CaseStudyCard';
 
 export default function ProjectsPageContent() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('scroll-reveal-visible');
-            entry.target.classList.remove('scroll-reveal-hidden');
-          }
-        });
-      },
-      { threshold: 0.06 }
-    );
-    const items = sectionRef?.current?.querySelectorAll('.reveal-item');
-    items?.forEach((item) => observer?.observe(item));
-    return () => observer?.disconnect();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="pt-32 pb-20">
+    <section className="pb-section pt-32 md:pt-40" aria-labelledby="projects-heading">
       <div className="container-portfolio">
-        {/* Page Header */}
-        <div className="reveal-item scroll-reveal-hidden mb-16 max-w-2xl">
-          <span className="mono-label text-primary">{'// projects'}</span>
-          <h1 className="text-display font-bold text-foreground mt-3">All Projects</h1>
-          <p className="text-base text-muted-foreground mt-3 leading-relaxed">
-            Case studies of web applications, backend systems and software development work.
-            Technical depth over quantity.
+        <header className="max-w-3xl border-b border-border pb-10">
+          <p className="mono-label text-accent">Selected work</p>
+          <h1 id="projects-heading" className="mt-3">
+            Selected Work
+          </h1>
+          <p className="type-body-large mt-5 text-muted-foreground">
+            A collection of software projects spanning web applications, backend development,
+            databases, APIs and system integration.
           </p>
-        </div>
-
-        {/* Project Case Studies */}
-        <div className="flex flex-col gap-16">
-          {projects?.map((project, idx) => (
-            <div
-              key={project?.slug}
-              id={project?.slug}
-              className="reveal-item scroll-reveal-hidden"
-              style={{ transitionDelay: `${idx * 80}ms` }}
-            >
-              <CaseStudyCard project={project} />
-            </div>
+        </header>
+        <div className="mt-10 space-y-6">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              variant={index === 0 ? 'dominant' : 'standard'}
+              headingLevel="h2"
+            />
           ))}
         </div>
       </div>

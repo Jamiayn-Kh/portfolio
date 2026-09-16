@@ -1,116 +1,161 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import Header from '@/components/Header';
+import ArchitectureDiagram from '@/components/projects/ArchitectureDiagram';
+import ProjectVisual from '@/components/projects/ProjectVisual';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 import { projects } from '@/data/projects';
 
 type Props = { params: Promise<{ slug: string }> };
+
 export function generateStaticParams() {
   return projects.map(({ slug }) => ({ slug }));
 }
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = projects.find((item) => item.slug === slug);
   return project
-    ? { title: project.name + ' | Jaimka Kh', description: project.description }
+    ? { title: `${project.name} | Jaimka Kh`, description: project.description }
     : { title: 'Project not found' };
 }
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = projects.find((item) => item.slug === slug);
   if (!project) notFound();
-  const sections = [
-    ['Overview', project.overview],
-    ['Problem', project.problem],
-    ['Solution', project.solution],
-    ['My Contribution', project.myContribution],
-    ['Challenges', project.challenges],
-    ['What I Learned', project.learned],
-  ];
+  const liveLink = project.links.find((link) => link.type === 'live');
+  const narrative = (
+    [
+      ['Overview', project.overview],
+      ['Solution', project.solution],
+      ['My Contribution', project.myContribution],
+      ['Challenges', project.challenges],
+      ['What I Learned', project.learned],
+    ] as Array<[string, string | undefined]>
+  ).filter((section): section is [string, string] => Boolean(section[1]));
+
   return (
     <>
       <Header />
-      <main id="main-content" className="container-portfolio pt-32 pb-20">
-        <Link href="/projects" className="text-accent">
-          ← All projects
-        </Link>
-        <p className="mono-label mt-8">{project.context}</p>
-        <h1 className="text-3xl md:text-5xl font-bold mt-3 max-w-4xl">{project.name}</h1>
-        <p className="text-muted-foreground mt-6 max-w-3xl">{project.description}</p>
-        <div className="grid lg:grid-cols-3 gap-8 mt-12">
-          <div className="lg:col-span-2 space-y-8">
-            {sections
-              .filter(([, text]) => text)
-              .map(([title, text]) => (
-                <section key={title}>
-                  <h2 className="text-xl font-semibold mb-3">{title}</h2>
-                  <p className="text-muted-foreground leading-relaxed">{text}</p>
+      <main id="main-content" className="pb-section pt-28 md:pt-36">
+        <article className="container-portfolio">
+          <Link href="/projects" className="btn btn-tertiary px-0 text-sm">
+            ← All selected work
+          </Link>
+          <header className="mt-8 grid gap-8 border-b border-border pb-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="mono-label text-accent">
+                0{project.index} / {project.context}
+              </p>
+              <h1 className="mt-4 max-w-3xl">{project.name}</h1>
+              <p className="type-body-large mt-5 max-w-2xl text-muted-foreground">
+                {project.description}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-1.5">
+                {project.technologies.slice(0, 5).map((technology) => (
+                  <span key={technology} className="tech-tag">
+                    {technology}
+                  </span>
+                ))}
+              </div>
+              {liveLink && (
+                <a
+                  href={liveLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary mt-7"
+                >
+                  Visit Live Site <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+            <div className="lg:col-span-5">
+              <ProjectVisual project={project} compact />
+            </div>
+          </header>
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-12">
+            <div className="space-y-12 lg:col-span-7">
+              {narrative.map(([title, content]) => (
+                <section
+                  key={title}
+                  aria-labelledby={`${project.slug}-${title.toLowerCase().replaceAll(' ', '-')}`}
+                >
+                  <p className="mono-label text-accent">{title}</p>
+                  <h2
+                    id={`${project.slug}-${title.toLowerCase().replaceAll(' ', '-')}`}
+                    className="mt-3 text-2xl"
+                  >
+                    {title}
+                  </h2>
+                  <p className="mt-4 leading-relaxed text-muted-foreground">{content}</p>
                 </section>
               ))}
-          </div>
-          <aside className="space-y-8">
-            {project.architecture?.length ? (
-              <section>
-                <h2 className="text-xl font-semibold mb-3">Architecture</h2>
-                <ol className="space-y-3">
-                  {project.architecture.map((node) => (
-                    <li key={node.label} className="arch-node flex flex-col">
-                      <span>{node.label}</span>
-                      {node.sublabel && (
-                        <span className="text-xs text-muted-foreground">{node.sublabel}</span>
-                      )}
+            </div>
+            <aside className="space-y-8 lg:col-span-5">
+              <section
+                className="rounded-xl border border-border bg-card p-5 md:p-6"
+                aria-labelledby={`${project.slug}-architecture`}
+              >
+                <p className="mono-label text-accent">Technical structure</p>
+                <h2 id={`${project.slug}-architecture`} className="mt-3 text-xl">
+                  Architecture
+                </h2>
+                <div className="mt-6">
+                  <ArchitectureDiagram project={project} />
+                </div>
+              </section>
+              <section aria-labelledby={`${project.slug}-areas`}>
+                <p className="mono-label text-accent">Engineering areas</p>
+                <h2 id={`${project.slug}-areas`} className="mt-3 text-xl">
+                  Technical areas
+                </h2>
+                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                  {project.keyAreas.map((area) => (
+                    <li key={area} className="flex gap-2">
+                      <span
+                        className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary"
+                        aria-hidden="true"
+                      />
+                      {area}
                     </li>
                   ))}
-                </ol>
-                {project.slug === 'smart-zud' && (
-                  <p className="text-sm text-muted-foreground mt-3">
-                    Backend API ↔ Python / Flask risk assessment module
-                  </p>
-                )}
-                {project.slug === 'af-shop' && (
-                  <p className="text-sm text-muted-foreground mt-3">
-                    Media: Cloudinary. Deployment: Vercel / Render.
-                  </p>
-                )}
+                </ul>
               </section>
-            ) : null}
-            <section>
-              <h2 className="text-xl font-semibold mb-3">Technologies</h2>
-              <ul className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <li className="tech-tag" key={tech}>
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </section>
-            <section>
-              <h2 className="text-xl font-semibold mb-3">Technical Areas</h2>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                {project.keyAreas.map((area) => (
-                  <li key={area}>{area}</li>
-                ))}
-              </ul>
-            </section>
-            {project.links.length > 0 && (
-              <section>
-                <h2 className="text-xl font-semibold mb-3">Links</h2>
-                {project.links.map((link) => (
+              <section aria-labelledby={`${project.slug}-technologies`}>
+                <p className="mono-label text-accent">Supporting evidence</p>
+                <h2 id={`${project.slug}-technologies`} className="mt-3 text-xl">
+                  Technologies
+                </h2>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {project.technologies.map((technology) => (
+                    <li key={technology} className="tech-tag">
+                      {technology}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              {liveLink && (
+                <section aria-labelledby={`${project.slug}-links`}>
+                  <p className="mono-label text-accent">Available link</p>
+                  <h2 id={`${project.slug}-links`} className="mt-3 text-xl">
+                    Links
+                  </h2>
                   <a
-                    key={link.url}
-                    href={link.url}
+                    href={liveLink.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent"
+                    className="btn btn-secondary mt-4"
                   >
-                    {link.label} ↗
+                    Live Site <span aria-hidden="true">↗</span>
                   </a>
-                ))}
-              </section>
-            )}
-          </aside>
-        </div>
+                </section>
+              )}
+            </aside>
+          </div>
+        </article>
       </main>
       <Footer />
     </>
