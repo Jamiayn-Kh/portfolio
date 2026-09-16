@@ -99,16 +99,13 @@ export default function HeroSection() {
                     id="architecture-title"
                     className="font-mono text-xs font-medium text-foreground"
                   >
-                    System architecture
+                    Engineering overview
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    A conceptual full-stack system
+                    Engineering Stack
                   </p>
                 </div>
-                <span className="mt-1 flex items-center gap-2 font-mono text-[0.6875rem] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                  connected
-                </span>
+               
               </figcaption>
               <div className="p-5 md:p-7">
                 <ol className="mx-auto max-w-sm">
@@ -141,9 +138,7 @@ export default function HeroSection() {
                   ))}
                 </ol>
               </div>
-              <p className="border-t border-border px-5 py-3 font-mono text-[0.6875rem] leading-relaxed text-muted-foreground md:px-6">
-                Conceptual capability map · project architectures vary
-              </p>
+             
             </div>
           </figure>
         </div>

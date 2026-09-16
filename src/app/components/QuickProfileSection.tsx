@@ -1,7 +1,7 @@
 const profileItems = [
   { title: 'Software Engineering', detail: "Bachelor's Degree" },
-  { title: 'Web + Backend', detail: 'Hands-on Development' },
-  { title: 'APIs + Databases', detail: 'Practical Experience' },
+  { title: 'Web + Backend', detail: 'Full-stack Projects' },
+  { title: 'APIs + Databases', detail: 'Project Experience' },
   { title: 'System Integration', detail: 'Enterprise Exposure' },
 ];
 
