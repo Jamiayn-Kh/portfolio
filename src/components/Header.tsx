@@ -1,84 +1,145 @@
 'use client';
 
 import { profile } from '@/data/profile';
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import AppLogo from '@/components/ui/AppLogo';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Skills', href: '/#skills' },
-  { label: 'Contact', href: '/contact' },
-];
+const links = [
+  ['home', 'Home', '/'],
+  ['about', 'About', '/#about'],
+  ['projects', 'Projects', '/projects'],
+  ['experience', 'Experience', '/#experience'],
+  ['skills', 'Skills', '/#skills'],
+  ['contact', 'Contact', '/contact'],
+] as const;
+const sectionIds = ['home', 'about', 'projects', 'experience', 'skills', 'contact-cta'];
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('home');
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const close = useCallback((restore = false) => {
+    setOpen(false);
+    if (restore) requestAnimationFrame(() => triggerRef.current?.focus());
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileOpen]);
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
-  const closeMobile = () => setMobileOpen(false);
+  useEffect(() => {
+    if (pathname.startsWith('/projects')) return setActive('projects');
+    if (pathname.startsWith('/contact')) return setActive('contact');
+    setActive('home');
+    if (pathname !== '/') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries
+          .filter((item) => item.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (entry) setActive(entry.target.id === 'contact-cta' ? 'contact' : entry.target.id);
+      },
+      { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.1, 0.5] }
+    );
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const background = document.querySelectorAll<HTMLElement>('main, footer');
+    background.forEach((element) => {
+      element.inert = true;
+      element.setAttribute('aria-hidden', 'true');
+    });
+    document.body.style.overflow = 'hidden';
+    const focusable = () =>
+      Array.from(menuRef.current?.querySelectorAll<HTMLElement>('a[href]') ?? []);
+    requestAnimationFrame(() => focusable()[0]?.focus());
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') return close(true);
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      const first = items[0];
+      const last = items.at(-1);
+      if (
+        (event.shiftKey && document.activeElement === first) ||
+        (!event.shiftKey && document.activeElement === last)
+      ) {
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+      background.forEach((element) => {
+        element.inert = false;
+        element.removeAttribute('aria-hidden');
+      });
+    };
+  }, [close, open]);
+
+  const navClass = (id: string, mobile = false) =>
+    [
+      'relative rounded-sm font-medium transition-colors',
+      mobile ? 'flex min-h-12 items-center border-b border-border text-xl' : 'py-2 text-sm',
+      active === id ? 'text-accent' : 'text-muted-foreground hover:text-foreground',
+      !mobile && active === id
+        ? 'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-primary'
+        : '',
+    ].join(' ');
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'py-3 bg-background/90 backdrop-blur-sm border-b border-border'
-            : 'py-5 bg-transparent'
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-all ${scrolled ? 'border-border bg-background/94 py-2.5 backdrop-blur-sm' : 'border-transparent bg-background/70 py-4'}`}
       >
-        <div className="container-portfolio flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group" onClick={closeMobile}>
-            <AppLogo size={28} />
-            <span className="font-mono text-sm font-medium tracking-wider text-foreground group-hover:text-accent transition-colors">
-              JAIMKA KH
+        <div className="container-portfolio flex min-h-12 items-center justify-between gap-5">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-3 rounded-sm text-foreground no-underline hover:no-underline"
+            aria-label="Jaimka Kh, home"
+          >
+            <span
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card font-mono text-xs font-semibold text-accent"
+              aria-hidden="true"
+            >
+              JK
             </span>
+            <span className="text-sm font-semibold tracking-tight">Jaimka Kh</span>
           </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
-            {navLinks?.map((link) => (
+          <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary navigation">
+            {links.map(([id, label, href]) => (
               <Link
-                key={link?.href}
-                href={link?.href}
-                className="mono-label hover:text-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
+                key={id}
+                href={href}
+                className={navClass(id)}
+                aria-current={active === id ? 'page' : undefined}
               >
-                {link?.label}
+                {label}
               </Link>
             ))}
           </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden shrink-0 items-center gap-2 xl:flex">
             {profile.githubUrl && (
               <a
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mono-label hover:text-accent transition-colors px-2 py-1"
-                aria-label="GitHub profile"
+                className="btn-tertiary px-2 py-2 text-sm"
               >
-                {/* REPLACE: Add your GitHub URL */}
                 GitHub
               </a>
             )}
@@ -87,92 +148,89 @@ export default function Header() {
                 href={profile.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mono-label hover:text-accent transition-colors px-2 py-1"
-                aria-label="LinkedIn profile"
+                className="btn-tertiary px-2 py-2 text-sm"
               >
-                {/* REPLACE: Add your LinkedIn URL */}
                 LinkedIn
               </a>
             )}
             {profile.resumeUrl && (
-              <a href={profile.resumeUrl} download className="btn btn-secondary">
+              <a href={profile.resumeUrl} download className="btn btn-secondary min-h-10 px-4">
                 Download CV
               </a>
             )}
           </div>
-
-          {/* Mobile Menu Button */}
           <button
-            className="lg:hidden flex flex-col gap-1.5 p-2 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={mobileOpen}
+            ref={triggerRef}
+            type="button"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-md border border-border bg-card xl:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
             <span
-              className={`block w-6 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}
+              className={`block h-px w-5 bg-foreground transition-transform ${open ? 'translate-y-1.5 rotate-45' : ''}`}
             />
             <span
-              className={`block w-6 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`}
+              className={`block h-px w-5 bg-foreground transition-opacity ${open ? 'opacity-0' : ''}`}
             />
             <span
-              className={`block w-6 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}
+              className={`block h-px w-5 bg-foreground transition-transform ${open ? '-translate-y-1.5 -rotate-45' : ''}`}
             />
           </button>
         </div>
       </header>
-
-      {/* Mobile Menu Overlay */}
-      {mobileOpen && (
+      {open && (
         <div
-          className="fixed inset-0 z-40 bg-background/95 backdrop-blur-sm flex flex-col pt-24 px-6 pb-8"
+          id="mobile-navigation"
+          ref={menuRef}
+          className="fixed inset-0 z-40 overflow-y-auto bg-background px-5 pb-8 pt-24 sm:px-8"
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile navigation"
+          aria-label="Navigation menu"
         >
-          <nav className="flex flex-col gap-6" aria-label="Mobile navigation links">
-            {navLinks?.map((link) => (
-              <Link
-                key={link?.href}
-                href={link?.href}
-                onClick={closeMobile}
-                className="text-2xl font-semibold text-foreground hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
-              >
-                {link?.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="flex flex-col gap-3 mt-10">
-            {profile.githubUrl && (
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                onClick={closeMobile}
-              >
-                GitHub
-              </a>
-            )}
-            {profile.linkedinUrl && (
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                onClick={closeMobile}
-              >
-                LinkedIn
-              </a>
-            )}
-            {profile.resumeUrl && (
-              <a
-                href={profile.resumeUrl}
-                download
-                className="btn btn-secondary"
-                onClick={closeMobile}
-              >
-                Download CV
-              </a>
+          <div className="mx-auto flex min-h-full max-w-portfolio flex-col">
+            <nav className="flex flex-col border-t border-border" aria-label="Mobile navigation">
+              {links.map(([id, label, href]) => (
+                <Link
+                  key={id}
+                  href={href}
+                  onClick={() => close()}
+                  className={`${navClass(id, true)} no-underline hover:no-underline`}
+                  aria-current={active === id ? 'page' : undefined}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            {(profile.githubUrl || profile.linkedinUrl || profile.resumeUrl) && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {profile.githubUrl && (
+                  <a
+                    href={profile.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                  >
+                    GitHub
+                  </a>
+                )}
+                {profile.linkedinUrl && (
+                  <a
+                    href={profile.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                  >
+                    LinkedIn
+                  </a>
+                )}
+                {profile.resumeUrl && (
+                  <a href={profile.resumeUrl} download className="btn btn-secondary">
+                    Download CV
+                  </a>
+                )}
+              </div>
             )}
           </div>
         </div>

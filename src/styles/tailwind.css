@@ -300,6 +300,23 @@
     background-size: 64px 64px;
     pointer-events: none;
   }
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    transform: translateY(-200%);
+    border-radius: var(--radius-control);
+    background: rgb(var(--primary));
+    color: rgb(var(--primary-foreground));
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
   /* Retain decorative hooks until section redesigns, without expensive effects. */
   .blob-primary,
   .blob-accent,
@@ -367,6 +384,13 @@
   .animate-fade-in-up {
     animation: fade-in-up var(--duration-reveal) var(--ease-standard) forwards;
   }
+  .hero-enter {
+    opacity: 1;
+    transform: none;
+  }
+  .architecture-connector {
+    transform-origin: top;
+  }
 }
 
 @keyframes fade-in-up {
@@ -377,6 +401,40 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes connector-reveal {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    animation: hero-enter 450ms var(--ease-standard) both;
+  }
+  .hero-enter-late {
+    animation-delay: 90ms;
+  }
+  .architecture-connector {
+    animation: connector-reveal 350ms var(--ease-standard) 250ms both;
   }
 }
 
@@ -399,7 +457,8 @@
   }
   .scroll-reveal-hidden,
   .scroll-reveal-visible,
-  .animate-fade-in-up {
+  .animate-fade-in-up,
+  .hero-enter {
     opacity: 1 !important;
     transform: none !important;
   }

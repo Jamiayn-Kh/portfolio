@@ -1,128 +1,46 @@
-'use client';
-
 import { profile } from '@/data/profile';
-import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const techStack = ['Next.js', 'NestJS', 'Node.js', 'Java', 'Python', 'PostgreSQL'];
-
-const archLayers = [
-  { label: 'Frontend', sublabel: 'Next.js / React' },
-  { label: 'REST API', sublabel: 'NestJS / Node.js' },
-  { label: 'Backend', sublabel: 'Business Logic' },
-  { label: 'Database', sublabel: 'PostgreSQL / MongoDB' },
+const architecture = [
+  { label: 'Frontend', technology: 'Next.js' },
+  { label: 'REST API', technology: 'Request / response' },
+  { label: 'Backend', technology: 'NestJS / Node.js' },
+  { label: 'Database', technology: 'PostgreSQL' },
 ];
 
 export default function HeroSection() {
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const hero = heroRef.current;
-      if (!hero) return;
-      const rect = hero.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      hero.style.setProperty('--mouse-x', x.toString());
-      hero.style.setProperty('--mouse-y', y.toString());
-    };
-    const hero = heroRef.current;
-    if (hero) hero.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      if (hero) hero.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   return (
     <section
-      ref={heroRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-20"
-      aria-label="Hero section"
+      id="home"
+      className="relative overflow-hidden pb-14 pt-28 md:pb-20 md:pt-36 lg:pb-24 lg:pt-40"
+      aria-labelledby="hero-title"
     >
-      {/* Background atmospheric layers */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 blob-primary animate-pulse-glow"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 blob-accent"
-          style={{ animationDelay: '1.5s' }}
-          aria-hidden="true"
-        />
-        {/* Subtle grid */}
-        <div className="absolute inset-0 technical-grid" aria-hidden="true" />
-        {/* Noise */}
-        <div className="absolute inset-0 noise-overlay" aria-hidden="true" />
-      </div>
-
-      <div className="container-portfolio relative z-10 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left: Text Content */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            {/* Badge */}
-            <div
-              className="flex items-center gap-2 animate-fade-in-up"
-              style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}
-            >
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping-dot absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-              </span>
-              <span className="mono-label text-accent">
-                Software Engineer · Ulaanbaatar, Mongolia
-              </span>
+      <div className="absolute inset-0 technical-grid opacity-60" aria-hidden="true" />
+      <div className="container-portfolio relative">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+          <div className="hero-enter lg:col-span-7">
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+              <p className="mono-label text-accent">Software Engineer · Ulaanbaatar</p>
             </div>
-
-            {/* Headline */}
-            <div
-              className="animate-fade-in-up"
-              style={{ animationDelay: '0.2s', opacity: 0, animationFillMode: 'forwards' }}
+            <p className="mt-7 text-lg font-semibold text-foreground">Jaimka Kh</p>
+            <h1
+              id="hero-title"
+              className="mt-3 max-w-3xl text-[clamp(2.75rem,6vw,4.75rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-foreground"
             >
-              <h1 className="text-hero font-extrabold tracking-tighter text-foreground leading-none">
-                JAIMKA
-                <br />
-                <span className="text-primary">KH</span>
-              </h1>
-            </div>
-
-            {/* Role */}
-            <div
-              className="animate-fade-in-up"
-              style={{ animationDelay: '0.35s', opacity: 0, animationFillMode: 'forwards' }}
-            >
-              <p className="font-mono text-base font-medium text-muted-foreground tracking-wide">
-                Software Engineer
-              </p>
-              <p className="text-lg md:text-xl text-foreground/90 font-medium leading-relaxed mt-2 max-w-xl">
-                I build practical web applications,
-                <br className="hidden sm:block" />
-                backend systems and API-driven solutions.
-              </p>
-              <p className="text-sm text-muted-foreground mt-2 max-w-lg leading-relaxed">
-                Full-stack / Backend development with a focus on practical software systems, APIs
-                and databases.
-              </p>
-            </div>
-
-            {/* Tech stack */}
-            <div
-              className="animate-fade-in-up flex flex-wrap gap-2"
-              style={{ animationDelay: '0.45s', opacity: 0, animationFillMode: 'forwards' }}
-            >
-              {techStack.map((tech) => (
-                <span key={tech} className="tech-tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div
-              className="flex flex-wrap gap-3 animate-fade-in-up"
-              style={{ animationDelay: '0.55s', opacity: 0, animationFillMode: 'forwards' }}
-            >
-              <Link href="/projects" className="btn btn-primary">
+              I build practical software systems.
+            </h1>
+            <p className="type-body-large mt-6 max-w-2xl text-foreground/80">
+              Web applications, backend systems, APIs and database-driven solutions built with a
+              practical engineering mindset.
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+              Software Engineer with hands-on experience across frontend, backend, databases, mobile
+              applications and system integration.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/#projects" className="btn btn-primary">
                 View Projects
               </Link>
               {profile.resumeUrl && (
@@ -130,15 +48,17 @@ export default function HeroSection() {
                   Download CV
                 </a>
               )}
+              {(profile.githubUrl || profile.linkedinUrl) && (
+                <span className="mx-1 hidden h-5 w-px bg-border sm:block" aria-hidden="true" />
+              )}
               {profile.githubUrl && (
                 <a
                   href={profile.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                  aria-label="GitHub profile"
+                  className="btn-tertiary px-2 py-2 text-sm"
                 >
-                  GitHub
+                  GitHub ↗
                 </a>
               )}
               {profile.linkedinUrl && (
@@ -146,77 +66,86 @@ export default function HeroSection() {
                   href={profile.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                  aria-label="LinkedIn profile"
+                  className="btn-tertiary px-2 py-2 text-sm"
                 >
-                  LinkedIn
+                  LinkedIn ↗
                 </a>
               )}
             </div>
-          </div>
-
-          {/* Right: Architecture Visual */}
-          <div
-            className="lg:col-span-5 animate-fade-in-up"
-            style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}
-            aria-hidden="true"
-          >
-            <div className="relative flex flex-col items-center gap-0 select-none">
-              {/* Outer glow */}
-              <div className="absolute inset-0 blob-accent" />
-
-              {/* Architecture diagram */}
-              <div className="relative z-10 flex flex-col items-center gap-0 w-full max-w-xs mx-auto">
-                <div className="mono-label text-muted-foreground mb-4 text-center">
-                  {'// system architecture'}
-                </div>
-                {archLayers.map((layer, idx) => (
-                  <React.Fragment key={layer.label}>
-                    <div
-                      className="arch-node w-full animate-float-slow"
-                      style={{ animationDelay: `${idx * 0.3}s` }}
-                    >
-                      <div className="flex flex-col items-center">
-                        <span className="text-accent font-semibold text-sm">{layer.label}</span>
-                        <span className="text-muted-foreground text-xs mt-0.5">
-                          {layer.sublabel}
-                        </span>
-                      </div>
-                    </div>
-                    {idx < archLayers.length - 1 && (
-                      <div className="flex flex-col items-center py-1" aria-hidden="true">
-                        <div className="w-px h-5 bg-primary/30" />
-                        <svg
-                          width="12"
-                          height="8"
-                          viewBox="0 0 12 8"
-                          fill="none"
-                          className="text-primary/40"
-                        >
-                          <path d="M6 8L0 0h12L6 8z" fill="currentColor" />
-                        </svg>
-                      </div>
+            <div className="mt-9 border-t border-border pt-5" aria-label="Selected technologies">
+              <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                {techStack.map((tech, index) => (
+                  <li
+                    key={tech}
+                    className="flex items-center gap-3 font-mono text-xs text-muted-foreground"
+                  >
+                    {index > 0 && (
+                      <span className="h-1 w-1 rounded-full bg-foreground/20" aria-hidden="true" />
                     )}
-                  </React.Fragment>
+                    {tech}
+                  </li>
                 ))}
-
-                {/* Corner decorations */}
-                <div className="absolute -top-3 -left-3 w-3 h-3 border-t border-l border-primary/40" />
-                <div className="absolute -top-3 -right-3 w-3 h-3 border-t border-r border-primary/40" />
-                <div className="absolute -bottom-3 -left-3 w-3 h-3 border-b border-l border-primary/40" />
-                <div className="absolute -bottom-3 -right-3 w-3 h-3 border-b border-r border-primary/40" />
-              </div>
+              </ul>
             </div>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-float-slow opacity-40"
-          aria-hidden="true"
-        >
-          <span className="mono-label">scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
+          <figure
+            className="hero-enter hero-enter-late lg:col-span-5"
+            aria-labelledby="architecture-title"
+          >
+            <div className="overflow-hidden rounded-2xl border border-border bg-card">
+              <figcaption className="flex items-start justify-between gap-4 border-b border-border px-5 py-4 md:px-6">
+                <div>
+                  <p
+                    id="architecture-title"
+                    className="font-mono text-xs font-medium text-foreground"
+                  >
+                    System architecture
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    A conceptual full-stack system
+                  </p>
+                </div>
+                <span className="mt-1 flex items-center gap-2 font-mono text-[0.6875rem] text-muted-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                  connected
+                </span>
+              </figcaption>
+              <div className="p-5 md:p-7">
+                <ol className="mx-auto max-w-sm">
+                  {architecture.map((node, index) => (
+                    <li key={node.label} className="relative">
+                      <div className="flex items-center gap-4 rounded-lg border border-border bg-elevated px-4 py-3.5">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-primary/30 bg-primary/8 font-mono text-[0.6875rem] text-accent">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-sm font-medium text-foreground">
+                            {node.label}
+                          </span>
+                          <span className="block font-mono text-xs text-muted-foreground">
+                            {node.technology}
+                          </span>
+                        </span>
+                        <span
+                          className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      {index < architecture.length - 1 && (
+                        <div
+                          className="architecture-connector mx-auto h-5 w-px bg-primary/35"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <p className="border-t border-border px-5 py-3 font-mono text-[0.6875rem] leading-relaxed text-muted-foreground md:px-6">
+                Conceptual capability map · project architectures vary
+              </p>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
