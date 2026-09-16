@@ -29,10 +29,8 @@ export default function ProjectsPageContent() {
       <div className="container-portfolio">
         {/* Page Header */}
         <div className="reveal-item scroll-reveal-hidden mb-16 max-w-2xl">
-          <span className="mono-label text-primary">// projects</span>
-          <h1 className="text-display font-bold text-foreground mt-3">
-            All Projects
-          </h1>
+          <span className="mono-label text-primary">{'// projects'}</span>
+          <h1 className="text-display font-bold text-foreground mt-3">All Projects</h1>
           <p className="text-base text-muted-foreground mt-3 leading-relaxed">
             Case studies of web applications, backend systems and software development work.
             Technical depth over quantity.

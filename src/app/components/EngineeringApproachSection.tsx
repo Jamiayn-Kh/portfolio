@@ -59,7 +59,7 @@ export default function EngineeringApproachSection() {
     <section id="approach" ref={sectionRef} className="section-padding border-t border-border">
       <div className="container-portfolio">
         <div className="reveal-item scroll-reveal-hidden mb-12">
-          <span className="mono-label text-primary">// 05 — approach</span>
+          <span className="mono-label text-primary">{'// 05 — approach'}</span>
           <h2 className="text-display font-bold text-foreground mt-2">How I Build Software</h2>
           <p className="text-sm text-muted-foreground mt-2 max-w-lg">
             A practical engineering mindset applied to every project.

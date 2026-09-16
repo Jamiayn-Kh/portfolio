@@ -13,13 +13,12 @@ interface AppLogoProps {
 }
 
 const AppLogo = memo(function AppLogo({
-  src = '/assets/images/app_logo.png',
+  src = '',
   iconName = 'SparklesIcon',
   size = 64,
   className = '',
   onClick,
 }: AppLogoProps) {
-  // Memoize className calculation
   const containerClassName = useMemo(() => {
     const classes = ['flex items-center'];
     if (onClick) classes.push('cursor-pointer hover:opacity-80 transition-opacity');
@@ -33,7 +32,7 @@ const AppLogo = memo(function AppLogo({
       {src ? (
         <AppImage
           src={src}
-          alt="Logo" 
+          alt="Logo"
           width={size}
           height={size}
           className="flex-shrink-0"

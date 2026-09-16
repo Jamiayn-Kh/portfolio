@@ -27,10 +27,11 @@ export default function SkillsSection() {
     <section id="skills" ref={sectionRef} className="section-padding border-t border-border">
       <div className="container-portfolio">
         <div className="reveal-item scroll-reveal-hidden mb-12">
-          <span className="mono-label text-primary">// 04 — skills</span>
+          <span className="mono-label text-primary">{'// 04 — skills'}</span>
           <h2 className="text-display font-bold text-foreground mt-2">Technical Skills</h2>
           <p className="text-sm text-muted-foreground mt-2 max-w-lg">
-            Technologies grouped by category. Where applicable, linked to projects where they were used.
+            Technologies grouped by category. Where applicable, linked to projects where they were
+            used.
           </p>
         </div>
 
@@ -73,7 +74,7 @@ export default function SkillsSection() {
           <div className="gradient-border bg-card rounded-xl p-6 md:p-8">
             <div className="grid md:grid-cols-2 gap-6 items-center">
               <div>
-                <span className="mono-label text-primary">// education</span>
+                <span className="mono-label text-primary">{'// education'}</span>
                 <h3 className="text-lg font-bold text-foreground mt-2">
                   Bachelor&apos;s Degree in Software Engineering
                 </h3>
@@ -95,7 +96,9 @@ export default function SkillsSection() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="mono-label text-muted-foreground">Language:</span>
-                  <span className="font-mono text-sm text-foreground">Mongolian / English (Intermediate)</span>
+                  <span className="font-mono text-sm text-foreground">
+                    Mongolian / English (Intermediate)
+                  </span>
                 </div>
               </div>
             </div>

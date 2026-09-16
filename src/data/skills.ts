@@ -14,8 +14,8 @@ export const skillGroups: SkillGroup[] = [
     category: 'Programming Languages',
     icon: 'CodeBracketIcon',
     skills: [
-      { name: 'TypeScript', projects: ['Smart Zud Risk System', 'AF Shop'] },
-      { name: 'JavaScript', projects: ['AF Shop'] },
+      { name: 'TypeScript' },
+      { name: 'JavaScript' },
       { name: 'Java', projects: ['Mungun Urlal'] },
       { name: 'Python', projects: ['Smart Zud Risk System'] },
       { name: 'Kotlin' },
@@ -38,10 +38,10 @@ export const skillGroups: SkillGroup[] = [
     category: 'Backend',
     icon: 'ServerIcon',
     skills: [
-      { name: 'Node.js', projects: ['Smart Zud Risk System', 'AF Shop'] },
+      { name: 'Node.js', projects: ['Smart Zud Risk System'] },
       { name: 'NestJS', projects: ['Smart Zud Risk System'] },
       { name: 'Spring Boot', projects: ['Mungun Urlal'] },
-      { name: 'REST API', projects: ['Smart Zud Risk System', 'Mungun Urlal', 'AF Shop'] },
+      { name: 'REST API', projects: ['Smart Zud Risk System'] },
       { name: 'Flask', projects: ['Smart Zud Risk System'] },
     ],
   },
@@ -57,10 +57,7 @@ export const skillGroups: SkillGroup[] = [
   {
     category: 'Mobile',
     icon: 'DevicePhoneMobileIcon',
-    skills: [
-      { name: 'Flutter' },
-      { name: 'Kotlin / Android' },
-    ],
+    skills: [{ name: 'Flutter' }, { name: 'Kotlin / Android' }],
   },
   {
     category: 'Tools & Development',

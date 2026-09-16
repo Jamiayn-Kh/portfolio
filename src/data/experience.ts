@@ -1,9 +1,10 @@
 export interface Experience {
   id: string;
   company: string;
+  originalCompany?: string;
   role: string;
-  period: string;
-  location: string;
+  period?: string;
+  location?: string;
   type: string;
   description: string;
   responsibilities: string[];
@@ -13,9 +14,10 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 'hunnu-air',
-    company: 'Хүннү Эйр ХХК',
+    company: 'Hunnu Air LLC',
+    originalCompany: 'Хүннү Эйр ХХК',
     role: 'Web Development',
-    period: '2025/06 – 2025/07',
+    period: 'June 2025 – July 2025',
     location: 'Ulaanbaatar, Mongolia',
     type: 'Web Development',
     description:
@@ -23,7 +25,6 @@ export const experiences: Experience[] = [
     responsibilities: [
       'Developed a document-tracking web system',
       'Recorded employee document view status',
-      'Implemented using modern web technologies',
     ],
     technologies: [],
   },
@@ -31,8 +32,6 @@ export const experiences: Experience[] = [
     id: 'tms-gps',
     company: 'Enterprise TMS Project',
     role: 'Enterprise System Integration & Technical Analysis',
-    period: '2025',
-    location: 'Ulaanbaatar, Mongolia',
     type: 'System Integration / Technical Analysis',
     description:
       'Worked within an enterprise Transportation Management System (TMS) environment, focusing on system analysis, API integration coordination, and cross-team technical communication.',

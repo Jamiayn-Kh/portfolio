@@ -1,5 +1,6 @@
 'use client';
 
+import { profile } from '@/data/profile';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AppLogo from '@/components/ui/AppLogo';
@@ -29,7 +30,9 @@ export default function Header() {
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [mobileOpen]);
 
   const closeMobile = () => setMobileOpen(false);
@@ -39,7 +42,8 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'py-3 bg-background/90 backdrop-blur-xl border-b border-border' :'py-5 bg-transparent'
+            ? 'py-3 bg-background/90 backdrop-blur-xl border-b border-border'
+            : 'py-5 bg-transparent'
         }`}
       >
         <div className="container-portfolio flex items-center justify-between">
@@ -66,33 +70,39 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mono-label hover:text-accent transition-colors px-2 py-1"
-              aria-label="GitHub profile"
-            >
-              {/* REPLACE: Add your GitHub URL */}
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mono-label hover:text-accent transition-colors px-2 py-1"
-              aria-label="LinkedIn profile"
-            >
-              {/* REPLACE: Add your LinkedIn URL */}
-              LinkedIn
-            </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 bg-primary/10 text-accent font-mono text-xs font-medium hover:bg-primary/20 hover:border-primary/60 transition-all duration-200"
-            >
-              Download CV
-            </a>
+            {profile.githubUrl && (
+              <a
+                href={profile.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mono-label hover:text-accent transition-colors px-2 py-1"
+                aria-label="GitHub profile"
+              >
+                {/* REPLACE: Add your GitHub URL */}
+                GitHub
+              </a>
+            )}
+            {profile.linkedinUrl && (
+              <a
+                href={profile.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mono-label hover:text-accent transition-colors px-2 py-1"
+                aria-label="LinkedIn profile"
+              >
+                {/* REPLACE: Add your LinkedIn URL */}
+                LinkedIn
+              </a>
+            )}
+            {profile.resumeUrl && (
+              <a
+                href={profile.resumeUrl}
+                download
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 bg-primary/10 text-accent font-mono text-xs font-medium hover:bg-primary/20 hover:border-primary/60 transition-all duration-200"
+              >
+                Download CV
+              </a>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -136,32 +146,38 @@ export default function Header() {
             ))}
           </nav>
           <div className="flex flex-col gap-3 mt-10">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
-              onClick={closeMobile}
-            >
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
-              onClick={closeMobile}
-            >
-              LinkedIn
-            </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="flex items-center justify-center gap-2 py-3 bg-primary/10 border border-primary/40 rounded-lg text-accent text-sm font-medium hover:bg-primary/20 transition-colors"
-              onClick={closeMobile}
-            >
-              Download CV
-            </a>
+            {profile.githubUrl && (
+              <a
+                href={profile.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
+                onClick={closeMobile}
+              >
+                GitHub
+              </a>
+            )}
+            {profile.linkedinUrl && (
+              <a
+                href={profile.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 border border-border rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
+                onClick={closeMobile}
+              >
+                LinkedIn
+              </a>
+            )}
+            {profile.resumeUrl && (
+              <a
+                href={profile.resumeUrl}
+                download
+                className="flex items-center justify-center gap-2 py-3 bg-primary/10 border border-primary/40 rounded-lg text-accent text-sm font-medium hover:bg-primary/20 transition-colors"
+                onClick={closeMobile}
+              >
+                Download CV
+              </a>
+            )}
           </div>
         </div>
       )}

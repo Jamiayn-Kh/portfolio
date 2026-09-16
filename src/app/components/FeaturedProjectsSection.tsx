@@ -33,7 +33,7 @@ export default function FeaturedProjectsSection() {
         {/* Header */}
         <div className="reveal-item scroll-reveal-hidden flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <div>
-            <span className="mono-label text-primary">// 02 — projects</span>
+            <span className="mono-label text-primary">{'// 02 — projects'}</span>
             <h2 className="text-display font-bold text-foreground mt-2">Featured Projects</h2>
             <p className="text-sm text-muted-foreground mt-2 max-w-lg">
               A selection of projects demonstrating practical web, backend and system development.
@@ -44,7 +44,12 @@ export default function FeaturedProjectsSection() {
             className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-primary transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded flex-shrink-0"
           >
             View all projects
-            <span className="group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true">→</span>
+            <span
+              className="group-hover:translate-x-1 transition-transform duration-200"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </Link>
         </div>
 
@@ -67,7 +72,10 @@ export default function FeaturedProjectsSection() {
           </div>
 
           {/* Card 2 — AfShop — full width */}
-          <div className="reveal-item scroll-reveal-hidden md:col-span-2" style={{ transitionDelay: '160ms' }}>
+          <div
+            className="reveal-item scroll-reveal-hidden md:col-span-2"
+            style={{ transitionDelay: '160ms' }}
+          >
             <div className="md:grid md:grid-cols-2 md:gap-8 bg-card rounded-xl border border-border overflow-hidden gradient-border card-hover">
               <div className="p-6 md:p-8 flex flex-col gap-4">
                 <div className="flex items-center gap-2">
@@ -76,10 +84,14 @@ export default function FeaturedProjectsSection() {
                 </div>
                 <h3 className="text-xl font-bold text-foreground">{featured?.[2]?.name}</h3>
                 <p className="text-accent font-mono text-sm">{featured?.[2]?.tagline}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">{featured?.[2]?.description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  {featured?.[2]?.description}
+                </p>
                 <div className="flex flex-wrap gap-1.5">
                   {featured?.[2]?.technologies?.map((t) => (
-                    <span key={t} className="tech-tag">{t}</span>
+                    <span key={t} className="tech-tag">
+                      {t}
+                    </span>
                   ))}
                 </div>
                 <div className="flex items-center gap-3 pt-4 border-t border-border">
@@ -93,7 +105,7 @@ export default function FeaturedProjectsSection() {
                     Live Demo ↗
                   </a>
                   <Link
-                    href={`/projects#${featured?.[2]?.slug}`}
+                    href={`/projects/${featured?.[2]?.slug}`}
                     className="text-sm font-semibold text-muted-foreground hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
                   >
                     Case Study →
@@ -101,19 +113,29 @@ export default function FeaturedProjectsSection() {
                 </div>
               </div>
               <div className="p-6 md:p-8 bg-background/40 flex flex-col gap-4 border-t md:border-t-0 md:border-l border-border">
-                <h4 className="mono-label text-primary">// architecture</h4>
+                <h4 className="mono-label text-primary">{'// architecture'}</h4>
                 {featured?.[2]?.architecture && (
                   <div className="flex flex-col gap-0">
                     {featured?.[2]?.architecture?.map((node, idx) => (
                       <React.Fragment key={node?.label}>
                         <div className="arch-node">
                           <span className="text-accent text-xs font-semibold">{node?.label}</span>
-                          {node?.sublabel && <span className="text-muted-foreground text-xs ml-2">— {node?.sublabel}</span>}
+                          {node?.sublabel && (
+                            <span className="text-muted-foreground text-xs ml-2">
+                              — {node?.sublabel}
+                            </span>
+                          )}
                         </div>
                         {idx < (featured?.[2]?.architecture?.length ?? 0) - 1 && (
                           <div className="flex flex-col items-center" aria-hidden="true">
                             <div className="w-px h-4 bg-primary/30" />
-                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="text-primary/40">
+                            <svg
+                              width="10"
+                              height="6"
+                              viewBox="0 0 10 6"
+                              fill="none"
+                              className="text-primary/40"
+                            >
                               <path d="M5 6L0 0h10L5 6z" fill="currentColor" />
                             </svg>
                           </div>
@@ -123,11 +145,17 @@ export default function FeaturedProjectsSection() {
                   </div>
                 )}
                 <div className="mt-4 pt-4 border-t border-border">
-                  <h4 className="mono-label text-muted-foreground mb-3">// key areas</h4>
+                  <h4 className="mono-label text-muted-foreground mb-3">{'// key areas'}</h4>
                   <ul className="flex flex-col gap-1.5">
                     {featured?.[2]?.keyAreas?.map((area) => (
-                      <li key={area} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span className="w-1 h-1 rounded-full bg-primary/60 flex-shrink-0" aria-hidden="true" />
+                      <li
+                        key={area}
+                        className="flex items-center gap-2 text-xs text-muted-foreground"
+                      >
+                        <span
+                          className="w-1 h-1 rounded-full bg-primary/60 flex-shrink-0"
+                          aria-hidden="true"
+                        />
                         {area}
                       </li>
                     ))}

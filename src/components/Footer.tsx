@@ -1,3 +1,4 @@
+import { profile } from '@/data/profile';
 import React from 'react';
 import Link from 'next/link';
 import AppLogo from '@/components/ui/AppLogo';
@@ -16,24 +17,28 @@ export default function Footer() {
 
         {/* Links */}
         <nav className="flex items-center gap-6" aria-label="Footer navigation">
-          <a
-            href="https://github.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mono-label hover:text-accent transition-colors"
-            aria-label="GitHub"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mono-label hover:text-accent transition-colors"
-            aria-label="LinkedIn"
-          >
-            LinkedIn
-          </a>
+          {profile.githubUrl && (
+            <a
+              href={profile.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono-label hover:text-accent transition-colors"
+              aria-label="GitHub"
+            >
+              GitHub
+            </a>
+          )}
+          {profile.linkedinUrl && (
+            <a
+              href={profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono-label hover:text-accent transition-colors"
+              aria-label="LinkedIn"
+            >
+              LinkedIn
+            </a>
+          )}
           <a
             href="mailto:jaik320024444@gmail.com"
             className="mono-label hover:text-accent transition-colors"
@@ -41,24 +46,16 @@ export default function Footer() {
           >
             Email
           </a>
-          <Link
-            href="/contact"
-            className="mono-label hover:text-accent transition-colors"
-          >
+          <Link href="/contact" className="mono-label hover:text-accent transition-colors">
             Contact
           </Link>
-          <Link
-            href="/projects"
-            className="mono-label hover:text-accent transition-colors"
-          >
+          <Link href="/projects" className="mono-label hover:text-accent transition-colors">
             Projects
           </Link>
         </nav>
 
         {/* Copyright */}
-        <p className="mono-label text-center sm:text-right">
-          © 2026 Jaimka Kh. · Privacy · Terms
-        </p>
+        <p className="mono-label text-center sm:text-right">© 2026 Jaimka Kh.</p>
       </div>
     </footer>
   );
