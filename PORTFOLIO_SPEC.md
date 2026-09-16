@@ -234,12 +234,9 @@ The site should feel premium and technical without being flashy.
 
 Think:
 
-Apple-level visual cleanliness
-+
-modern software engineering portfolio
-+
-subtle bento composition
-+
+Apple-level visual cleanliness +
+modern software engineering portfolio +
+subtle bento composition +
 high-end dark developer interface
 
 Do NOT make it look like:

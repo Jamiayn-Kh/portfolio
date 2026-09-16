@@ -70,7 +70,8 @@ When working on this portfolio:
    - preserve useful existing architecture
 
 10. After changes:
-   - run TypeScript checks
-   - run lint
-   - run production build where appropriate
-   - report remaining issues
+
+- run TypeScript checks
+- run lint
+- run production build where appropriate
+- report remaining issues

@@ -101,11 +101,8 @@ export default function HeroSection() {
                   >
                     Engineering overview
                   </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Engineering Stack
-                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">Engineering Stack</p>
                 </div>
-               
               </figcaption>
               <div className="p-5 md:p-7">
                 <ol className="mx-auto max-w-sm">
@@ -138,7 +135,6 @@ export default function HeroSection() {
                   ))}
                 </ol>
               </div>
-             
             </div>
           </figure>
         </div>
