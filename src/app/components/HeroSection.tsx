@@ -27,17 +27,15 @@ export default function HeroSection() {
             <p className="mt-7 text-lg font-semibold text-foreground">Jaimka Kh</p>
             <h1
               id="hero-title"
-              className="mt-3 max-w-3xl text-[clamp(2.75rem,6vw,4.75rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-foreground"
+              className="mt-3 max-w-3xl text-[clamp(2rem,4vw,4rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-foreground"
             >
-              I build practical software systems.
+              I aim to develop software systems that provide practical value and are built around user requirements.
             </h1>
             <p className="type-body-large mt-6 max-w-2xl text-foreground/80">
-              Web applications, backend systems, APIs and database-driven solutions built with a
-              practical engineering mindset.
+              I build web applications, backend systems, APIs, and database-driven solutions with a focus on user needs and practical engineering decisions.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              Software Engineer with hands-on experience across frontend, backend, databases, mobile
-              applications and system integration.
+              I am a Software Engineer with experience across frontend, backend, databases, mobile applications, and system integration.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/#projects" className="btn btn-primary">
