@@ -238,7 +238,8 @@ export default function ContactPageContent() {
                         <div>
                           <p className="text-sm font-medium text-accent">Download CV</p>
                           <p className="mono-label text-muted-foreground">
-                            resume.pdf{profile.resumeUpdated ? ` · Updated ${profile.resumeUpdated}` : ''}
+                            resume.pdf
+                            {profile.resumeUpdated ? ` · Updated ${profile.resumeUpdated}` : ''}
                           </p>
                         </div>
                       </a>
