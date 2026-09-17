@@ -36,17 +36,6 @@ export default function ProjectCard({
             {project.context}
           </p>
           <div className="flex shrink-0 items-center gap-2">
-            {githubLink && (
-              <a
-                href={githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-tertiary min-h-9 px-3 text-xs"
-                aria-label={`View ${project.name} on GitHub`}
-              >
-                GitHub ↗
-              </a>
-            )}
             {liveLink && (
               <a
                 href={liveLink.url}

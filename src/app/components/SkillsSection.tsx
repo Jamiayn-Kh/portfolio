@@ -97,7 +97,7 @@ export default function SkillsSection() {
                 <div className="flex items-center gap-3">
                   <span className="mono-label text-muted-foreground">Language:</span>
                   <span className="font-mono text-sm text-foreground">
-                    Mongolian / English (Intermediate)
+                    Mongolian / English (Upper Intermediate)
                   </span>
                 </div>
               </div>
