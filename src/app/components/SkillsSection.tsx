@@ -82,7 +82,7 @@ export default function SkillsSection() {
                   National University of Mongolia · МУИС МТЭС
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  School of Information and Computer Science  ·  GPA: 3.5
+                  School of Information and Computer Science · GPA: 3.5
                 </p>
               </div>
               <div className="flex flex-col gap-2">
