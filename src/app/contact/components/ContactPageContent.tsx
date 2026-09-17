@@ -179,10 +179,7 @@ export default function ContactPageContent() {
                           <p className="text-sm font-medium text-foreground group-hover:text-accent transition-colors">
                             GitHub
                           </p>
-                          <p className="mono-label text-muted-foreground">
-                            {/* REPLACE: Add your GitHub URL */}
-                            {profile.githubUrl}
-                          </p>
+                          <p className="mono-label text-muted-foreground">{profile.githubUrl}</p>
                         </div>
                       </a>
                     )}
@@ -240,7 +237,9 @@ export default function ContactPageContent() {
                         </svg>
                         <div>
                           <p className="text-sm font-medium text-accent">Download CV</p>
-                          <p className="mono-label text-muted-foreground">resume.pdf</p>
+                          <p className="mono-label text-muted-foreground">
+                            resume.pdf{profile.resumeUpdated ? ` · Updated ${profile.resumeUpdated}` : ''}
+                          </p>
                         </div>
                       </a>
                     )}

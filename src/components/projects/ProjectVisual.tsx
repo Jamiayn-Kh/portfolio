@@ -8,7 +8,7 @@ interface ProjectVisualProps {
 
 const visualLabels: Record<string, string[]> = {
   'smart-zud': ['Geographic data', 'Weather factors', 'Risk assessment'],
-  'mungun-urlal': ['Java 17', 'Spring Boot', 'mungun_urlal'],
+  'mungun-urlal': ['Order-to-sale workflow', 'Regional distribution', 'Stock tracking'],
   'af-shop': ['Retail web system', 'Media management', 'Vercel / Render'],
 };
 

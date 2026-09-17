@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 const techStack = ['Next.js', 'NestJS', 'Node.js', 'Java', 'Python', 'PostgreSQL'];
 const architecture = [
-  { label: 'Frontend', technology: 'Next.js' },
-  { label: 'REST API', technology: 'Request / response' },
-  { label: 'Backend', technology: 'NestJS / Node.js' },
-  { label: 'Database', technology: 'PostgreSQL' },
+  { label: 'Frontend', technology: 'Next.js / React' },
+  { label: 'Backend & REST API', technology: 'NestJS / Node.js / Spring Boot' },
+  { label: 'Database', technology: 'PostgreSQL / MongoDB' },
+  { label: 'Integration & Deployment', technology: 'GPS/TMS systems · Vercel · AWS' },
 ];
 
 export default function HeroSection() {

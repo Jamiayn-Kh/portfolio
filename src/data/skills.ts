@@ -28,8 +28,9 @@ export const skillGroups: SkillGroup[] = [
     category: 'Frontend',
     icon: 'WindowIcon',
     skills: [
-      { name: 'React', projects: ['Smart Zud Risk System'] },
-      { name: 'Next.js', projects: ['Smart Zud Risk System'] },
+      { name: 'React', projects: ['Smart Zud Risk System', 'AF Shop'] },
+      { name: 'Next.js', projects: ['Smart Zud Risk System', 'AF Shop'] },
+      { name: 'Tailwind CSS', projects: ['AF Shop'] },
       { name: 'HTML' },
       { name: 'CSS' },
     ],

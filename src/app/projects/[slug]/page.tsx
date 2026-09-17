@@ -6,6 +6,7 @@ import ProjectVisual from '@/components/projects/ProjectVisual';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { projects } from '@/data/projects';
+import { profile } from '@/data/profile';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,6 +27,7 @@ export default async function ProjectPage({ params }: Props) {
   const project = projects.find((item) => item.slug === slug);
   if (!project) notFound();
   const liveLink = project.links.find((link) => link.type === 'live');
+  const githubLink = project.links.find((link) => link.type === 'github')?.url ?? profile.githubUrl;
   const narrative = (
     [
       ['Overview', project.overview],
@@ -60,16 +62,28 @@ export default async function ProjectPage({ params }: Props) {
                   </span>
                 ))}
               </div>
-              {liveLink && (
-                <a
-                  href={liveLink.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary mt-7"
-                >
-                  Visit Live Site <span aria-hidden="true">↗</span>
-                </a>
-              )}
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                {liveLink && (
+                  <a
+                    href={liveLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Visit Live Site <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+                {githubLink && (
+                  <a
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                  >
+                    View on GitHub <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
             </div>
             <div className="lg:col-span-5">
               <ProjectVisual project={project} compact />
@@ -125,7 +139,7 @@ export default async function ProjectPage({ params }: Props) {
                 </ul>
               </section>
               <section aria-labelledby={`${project.slug}-technologies`}>
-                <p className="mono-label text-accent">Supporting evidence</p>
+                <p className="mono-label text-accent">Tech stack</p>
                 <h2 id={`${project.slug}-technologies`} className="mt-3 text-xl">
                   Technologies
                 </h2>
@@ -137,20 +151,34 @@ export default async function ProjectPage({ params }: Props) {
                   ))}
                 </ul>
               </section>
-              {liveLink && (
+              {(liveLink || githubLink) && (
                 <section aria-labelledby={`${project.slug}-links`}>
-                  <p className="mono-label text-accent">Available link</p>
+                  <p className="mono-label text-accent">Available links</p>
                   <h2 id={`${project.slug}-links`} className="mt-3 text-xl">
                     Links
                   </h2>
-                  <a
-                    href={liveLink.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary mt-4"
-                  >
-                    Live Site <span aria-hidden="true">↗</span>
-                  </a>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {liveLink && (
+                      <a
+                        href={liveLink.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-secondary"
+                      >
+                        Live Site <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                    {githubLink && (
+                      <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-tertiary"
+                      >
+                        GitHub <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </div>
                 </section>
               )}
             </aside>

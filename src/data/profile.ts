@@ -1,8 +1,8 @@
 // Add verified profile URLs here. Empty values hide public links.
 export const profile = {
-  githubUrl: '',
+  githubUrl: 'https://github.com/Jamiayn-Kh',
   linkedinUrl: '',
-  // Replace /public/resume.pdf with the final English CV, then set this to '/resume.pdf'.
-  resumeUrl: '',
+  resumeUrl: '/resume.pdf',
+  resumeUpdated: '2026/07',
   email: 'jaik320024444@gmail.com',
 };

@@ -28,11 +28,11 @@ export default function ArchitectureDiagram({
       <div
         className={className}
         role="img"
-        aria-label="Smart Zud architecture: Next.js and React connect to a NestJS REST API, which connects to PostgreSQL and a Python Flask ML module."
+        aria-label="Smart Zud architecture: Next.js and React connect to a NestJS backend API, which connects to PostgreSQL and a Python Flask ML module."
       >
         <Node title="Frontend" detail="Next.js / React 19" />
         <Connector />
-        <Node title="REST API" detail="NestJS / Node.js" />
+        <Node title="Backend API" detail="NestJS / Node.js (REST)" />
         <div className="architecture-branch" aria-hidden="true">
           <span />
           <span />
@@ -49,9 +49,9 @@ export default function ArchitectureDiagram({
       <div
         className={className}
         role="img"
-        aria-label="Mungun Urlal architecture: an API consumer connects to a Spring Boot application, repository layer, and PostgreSQL database. JWT authentication and Flyway migration are included."
+        aria-label="Mungun Urlal architecture: a client connects to a Spring Boot application, repository layer, and PostgreSQL database. JWT authentication and Flyway migration are included."
       >
-        <Node title="API consumer" />
+        <Node title="Client" />
         <Connector />
         <Node title="Application" detail="Spring Boot" />
         <Connector />
@@ -71,9 +71,9 @@ export default function ArchitectureDiagram({
     <div
       className={className}
       role="img"
-      aria-label="AF Shop architecture: a web application connects to an application backend and MongoDB Atlas. Cloudinary supports media and Vercel and Render are deployment technologies."
+      aria-label="AF Shop architecture: a React / Next.js frontend connects to an application backend and MongoDB Atlas. Cloudinary supports media and Vercel and Render are deployment technologies."
     >
-      <Node title="Web application" />
+      <Node title="Frontend" detail="React / Next.js" />
       <Connector />
       <Node title="Application backend" />
       <Connector />

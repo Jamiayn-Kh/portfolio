@@ -84,25 +84,25 @@ export const projects: Project[] = [
     overview:
       'A web-based system for winter camp rental and dzud risk assessment, developed as a university diploma project.',
     solution:
-      'The Next.js / React frontend connects to a NestJS REST API and PostgreSQL database. The backend also communicates with a Python / Flask risk assessment module. The ML approaches used include Random Forest, Gradient Boosting and Logistic Regression, with cold_index and snow_cumulative among the known model features.',
+      'The Next.js / React frontend connects to a NestJS REST API and PostgreSQL database. The backend also communicates with a Python / Flask risk assessment module. The ML approaches used include Random Forest, Gradient Boosting and Logistic Regression, with features such as a winter cold-severity index and cumulative snowfall among the model inputs.',
     featured: true,
     index: 1,
   },
   {
     slug: 'mungun-urlal',
     name: 'Mungun Urlal',
-    tagline: 'Backend-focused Java / Spring Boot application',
+    tagline: 'Backend system for a production-to-sale distribution workflow',
     description:
-      'A backend-oriented software project using Java 17, Spring Boot and PostgreSQL, with JWT authentication and Flyway database migrations.',
+      'A Java / Spring Boot backend that unifies a multi-stage distribution process — production, shipment to provincial resellers, receipt confirmation and sales reporting — into a single system, with JWT authentication and Flyway database migrations.',
     role: 'Backend development',
     context: 'Backend Development Project',
     technologies: ['Java 17', 'Spring Boot', 'PostgreSQL', 'Flyway', 'JWT'],
     keyAreas: [
+      'Order-to-sale workflow modeling',
       'Backend architecture',
       'JWT authentication',
       'User and UserRole models',
       'Repository layer',
-      'Admin initialization',
       'Database migrations',
     ],
     links: [],
@@ -125,9 +125,11 @@ export const projects: Project[] = [
     coverImagePath: '/projects/mungun-urlal/cover.webp',
     coverImageAvailable: false,
     overview:
-      'A Java / Spring Boot backend project demonstrating application architecture, relational database usage, authentication and database migration.',
+      'A backend system for a production-and-distribution business: it tracks a product from manufacturing through shipment to provincial resellers, receipt confirmation, sale and stock reporting, replacing manual, Excel-based record-keeping with one centralized workflow.',
+    problem:
+      'The business ran its order → production/preparation → shipping → handover to a provincial reseller → receipt confirmation → sale → reporting flow largely through manual, Excel-based records, which caused data duplication and errors and gave no real-time view of orders, shipments, receipts or remaining stock.',
     solution:
-      'The implementation includes User and UserRole models, a repository layer, JWT authentication and admin initialization. Flyway manages migrations for the mungun_urlal database schema.',
+      'The Spring Boot backend centralizes orders and product data, tracks shipment status through each stage, lets provincial resellers confirm receipt of delivered goods, tracks stock levels and transfers, and records sales for reporting — all from a single source of truth. The implementation includes User and UserRole models, a repository layer, JWT authentication and admin initialization, with Flyway managing migrations for the mungun_urlal database schema.',
     featured: true,
     index: 2,
   },
@@ -139,8 +141,17 @@ export const projects: Project[] = [
       'A web-based shopping system for clothing / retail, with guest checkout, admin functionality, product management and image / media management.',
     role: 'Web application development',
     context: 'E-commerce Web Application',
-    technologies: ['MongoDB Atlas', 'Cloudinary', 'Render', 'Vercel'],
+    technologies: [
+      'React',
+      'Next.js',
+      'Tailwind CSS',
+      'MongoDB Atlas',
+      'Cloudinary',
+      'Render',
+      'Vercel',
+    ],
     keyAreas: [
+      'Frontend development (React / Next.js / Tailwind CSS)',
       'Web application development',
       'Backend',
       'MongoDB Atlas database',
@@ -158,7 +169,8 @@ export const projects: Project[] = [
     ],
     architecture: [
       {
-        label: 'Web Application',
+        label: 'Frontend',
+        sublabel: 'React / Next.js / Tailwind CSS',
       },
       {
         label: 'Application Backend',
@@ -171,7 +183,7 @@ export const projects: Project[] = [
     coverImagePath: '/projects/af-shop/cover.webp',
     coverImageAvailable: false,
     overview:
-      'An online shopping system for clothing / retail, presented as one project under the AF Shop name.',
+      'A live online clothing / retail store built end-to-end with a React / Next.js / Tailwind CSS frontend, supporting guest checkout, admin product management and image/media management.',
     solution:
       'The application supports guest checkout, admin functionality and product management. MongoDB Atlas is used for the database and Cloudinary for media. Deployment technologies include Vercel and Render.',
     featured: true,

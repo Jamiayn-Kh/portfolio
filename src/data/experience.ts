@@ -17,7 +17,7 @@ export const experiences: Experience[] = [
     company: 'Hunnu Air LLC',
     originalCompany: 'Хүннү Эйр ХХК',
     role: 'Web Development',
-    period: 'June 2025 – July 2025',
+    period: '2025/06 – 2025/07',
     location: 'Ulaanbaatar, Mongolia',
     type: 'Web Development',
     description:

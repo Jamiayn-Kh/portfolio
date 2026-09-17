@@ -1,5 +1,6 @@
 import type { Project } from '@/data/projects';
 import Link from 'next/link';
+import { profile } from '@/data/profile';
 import ArchitectureDiagram from './ArchitectureDiagram';
 import ProjectVisual from './ProjectVisual';
 
@@ -15,6 +16,7 @@ export default function ProjectCard({
   headingLevel = 'h3',
 }: ProjectCardProps) {
   const liveLink = project.links.find((link) => link.type === 'live');
+  const githubLink = project.links.find((link) => link.type === 'github')?.url ?? profile.githubUrl;
   const Title = headingLevel;
   const dominant = variant === 'dominant';
 
@@ -33,17 +35,30 @@ export default function ProjectCard({
             <span className="mr-2 text-accent">0{project.index}</span>
             {project.context}
           </p>
-          {liveLink && (
-            <a
-              href={liveLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary min-h-9 shrink-0 px-3 text-xs"
-              aria-label={`Visit ${project.name} live site`}
-            >
-              Live Site ↗
-            </a>
-          )}
+          <div className="flex shrink-0 items-center gap-2">
+            {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-tertiary min-h-9 px-3 text-xs"
+                aria-label={`View ${project.name} on GitHub`}
+              >
+                GitHub ↗
+              </a>
+            )}
+            {liveLink && (
+              <a
+                href={liveLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary min-h-9 px-3 text-xs"
+                aria-label={`Visit ${project.name} live site`}
+              >
+                Live Site ↗
+              </a>
+            )}
+          </div>
         </div>
         <Title
           className={`mt-4 font-semibold tracking-tight text-foreground ${dominant ? 'text-2xl md:text-3xl' : 'text-xl'}`}
