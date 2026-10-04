@@ -6,7 +6,7 @@ const architecture = [
   { label: 'Frontend', technology: 'Next.js / React' },
   { label: 'Backend & REST API', technology: 'NestJS / Node.js / Spring Boot' },
   { label: 'Database', technology: 'PostgreSQL / MongoDB' },
-  { label: 'Integration & Deployment', technology: 'GPS/TMS systems · Vercel · AWS' },
+  { label: 'Integration & Deployment', technology: 'Flask / Cloudinary · Vercel / Render' },
 ];
 
 export default function HeroSection() {
@@ -38,7 +38,7 @@ export default function HeroSection() {
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
               I am a Software Engineer with experience across frontend, backend, databases, mobile
-              applications, and system integration.
+              applications, and API integration.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/#projects" className="btn btn-primary">

@@ -7,9 +7,9 @@ interface ProjectVisualProps {
 }
 
 const visualLabels: Record<string, string[]> = {
-  'smart-zud': ['Geographic data', 'Weather factors', 'Risk assessment'],
+  'smart-zud': ['Verified listings', 'Rental workflow', 'Experimental risk assessment'],
   'mungun-urlal': ['Order-to-sale workflow', 'Regional distribution', 'Stock tracking'],
-  'af-shop': ['Retail web system', 'Media management', 'Vercel / Render'],
+  'af-shop': ['Size-aware cart', 'Guest orders', 'Admin management'],
 };
 
 export default function ProjectVisual({ project, compact = false }: ProjectVisualProps) {

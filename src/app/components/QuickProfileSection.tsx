@@ -2,7 +2,7 @@ const profileItems = [
   { title: 'Software Engineering', detail: "Bachelor's Degree" },
   { title: 'Web + Backend', detail: 'Full-stack Projects' },
   { title: 'APIs + Databases', detail: 'Project Experience' },
-  { title: 'System Integration', detail: 'Enterprise Exposure' },
+  { title: 'Service Integration', detail: 'Flask + Cloudinary' },
 ];
 
 export default function QuickProfileSection() {

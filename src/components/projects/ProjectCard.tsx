@@ -1,6 +1,5 @@
 import type { Project } from '@/data/projects';
 import Link from 'next/link';
-import { profile } from '@/data/profile';
 import ArchitectureDiagram from './ArchitectureDiagram';
 import ProjectVisual from './ProjectVisual';
 
@@ -16,7 +15,6 @@ export default function ProjectCard({
   headingLevel = 'h3',
 }: ProjectCardProps) {
   const liveLink = project.links.find((link) => link.type === 'live');
-  const githubLink = project.links.find((link) => link.type === 'github')?.url ?? profile.githubUrl;
   const Title = headingLevel;
   const dominant = variant === 'dominant';
 
@@ -81,11 +79,13 @@ export default function ProjectCard({
         </div>
 
         <div className="mt-6 flex flex-wrap gap-1.5 border-t border-border pt-5">
-          {project.technologies.slice(0, dominant ? 6 : 4).map((technology) => (
-            <span key={technology} className="tech-tag">
-              {technology}
-            </span>
-          ))}
+          {(project.cardTechnologies ?? project.technologies.slice(0, dominant ? 6 : 4)).map(
+            (technology) => (
+              <span key={technology} className="tech-tag">
+                {technology}
+              </span>
+            )
+          )}
         </div>
         <div className="mt-5">
           <Link href={`/projects/${project.slug}`} className="btn btn-tertiary px-0 text-sm">

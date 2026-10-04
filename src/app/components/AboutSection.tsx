@@ -38,12 +38,6 @@ const journeySteps = [
   },
   {
     phase: '07',
-    title: 'Enterprise TMS / GPS Integration',
-    description:
-      'Worked within enterprise software environment — system analysis, API integration, cross-team coordination.',
-  },
-  {
-    phase: '08',
     title: 'Software Engineering Career',
     description: 'Actively pursuing full-stack / backend software engineering opportunities.',
   },

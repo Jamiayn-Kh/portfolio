@@ -27,16 +27,23 @@ export default async function ProjectPage({ params }: Props) {
   const project = projects.find((item) => item.slug === slug);
   if (!project) notFound();
   const liveLink = project.links.find((link) => link.type === 'live');
-  const githubLink = project.links.find((link) => link.type === 'github')?.url ?? profile.githubUrl;
-  const narrative = (
-    [
-      ['Overview', project.overview],
-      ['Solution', project.solution],
-      ['My Contribution', project.myContribution],
-      ['Challenges', project.challenges],
-      ['What I Learned', project.learned],
-    ] as Array<[string, string | undefined]>
-  ).filter((section): section is [string, string] => Boolean(section[1]));
+  const githubLink =
+    project.links.find((link) => link.type === 'github')?.url ??
+    (project.slug === 'mungun-urlal' ? profile.githubUrl : undefined);
+  const narrative = [
+    ...(
+      [
+        ['Overview', project.overview],
+        ['Solution', project.solution],
+        ['My Contribution', project.myContribution],
+        ['Challenges', project.challenges],
+        ['What I Learned', project.learned],
+      ] as Array<[string, string | undefined]>
+    )
+      .filter((section): section is [string, string] => Boolean(section[1]))
+      .map(([title, content]) => ({ title, paragraphs: [content] })),
+    ...(project.sections ?? []),
+  ];
 
   return (
     <>
@@ -92,7 +99,7 @@ export default async function ProjectPage({ params }: Props) {
 
           <div className="mt-12 grid gap-12 lg:grid-cols-12">
             <div className="space-y-12 lg:col-span-7">
-              {narrative.map(([title, content]) => (
+              {narrative.map(({ title, paragraphs }) => (
                 <section
                   key={title}
                   aria-labelledby={`${project.slug}-${title.toLowerCase().replaceAll(' ', '-')}`}
@@ -104,7 +111,11 @@ export default async function ProjectPage({ params }: Props) {
                   >
                     {title}
                   </h2>
-                  <p className="mt-4 leading-relaxed text-muted-foreground">{content}</p>
+                  {paragraphs.map((paragraph) => (
+                    <p key={paragraph} className="mt-4 leading-relaxed text-muted-foreground">
+                      {paragraph}
+                    </p>
+                  ))}
                 </section>
               ))}
             </div>

@@ -28,9 +28,9 @@ export default function ArchitectureDiagram({
       <div
         className={className}
         role="img"
-        aria-label="Smart Zud architecture: Next.js and React connect to a NestJS backend API, which connects to PostgreSQL and a Python Flask ML module."
+        aria-label="Smart Zud architecture: TypeScript and Next.js connect to NestJS with JWT access control and Socket.IO notifications. Prisma connects to PostgreSQL; HTTP connects to a Python Flask risk service with timeout and fallback handling."
       >
-        <Node title="Frontend" detail="Next.js / React 19" />
+        <Node title="Frontend" detail="TypeScript / Next.js / React" />
         <Connector />
         <Node title="Backend API" detail="NestJS / Node.js (REST)" />
         <div className="architecture-branch" aria-hidden="true">
@@ -38,9 +38,16 @@ export default function ArchitectureDiagram({
           <span />
         </div>
         <div className="architecture-pair">
-          <Node title="Database" detail="PostgreSQL" />
-          <Node title="ML module" detail="Python / Flask" />
+          <Node title="Database" detail="PostgreSQL / Prisma" />
+          <Node title="Risk service" detail="Python / Flask / scikit-learn" />
         </div>
+        {!compact && (
+          <div className="architecture-notes">
+            <span>Access · JWT / Passport</span>
+            <span>Notifications · Socket.IO</span>
+            <span>Flask HTTP · timeout / fallback</span>
+          </div>
+        )}
       </div>
     );
   }
@@ -71,17 +78,23 @@ export default function ArchitectureDiagram({
     <div
       className={className}
       role="img"
-      aria-label="AF Shop architecture: a React / Next.js frontend connects to an application backend and MongoDB Atlas. Cloudinary supports media and Vercel and Render are deployment technologies."
+      aria-label="AF Shop architecture: a TypeScript Next.js frontend connects to a JavaScript Node.js Express API. Mongoose connects to MongoDB, and Multer uploads images to Cloudinary with file-type and size limits."
     >
-      <Node title="Frontend" detail="React / Next.js" />
+      <Node title="Frontend" detail="TypeScript / Next.js / React" />
       <Connector />
-      <Node title="Application backend" />
-      <Connector />
-      <Node title="Database" detail="MongoDB Atlas" />
+      <Node title="Backend API" detail="JavaScript / Node.js / Express" />
+      <div className="architecture-branch" aria-hidden="true">
+        <span />
+        <span />
+      </div>
+      <div className="architecture-pair">
+        <Node title="Database" detail="MongoDB / Mongoose" />
+        <Node title="Media upload" detail="Multer / Cloudinary" />
+      </div>
       {!compact && (
         <div className="architecture-notes">
-          <span>Media · Cloudinary</span>
-          <span>Deployment · Vercel / Render</span>
+          <span>Requests · Joi validation</span>
+          <span>Uploads · file-type / size limits</span>
         </div>
       )}
     </div>
