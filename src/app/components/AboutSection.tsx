@@ -33,7 +33,7 @@ const journeySteps = [
   },
   {
     phase: '06',
-    title: 'Real-world E-commerce',
+    title: 'E-commerce Web Application',
     description: 'Implemented and deployed a live e-commerce web application (AF Shop).',
   },
   {
